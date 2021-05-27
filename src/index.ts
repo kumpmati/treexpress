@@ -1,5 +1,7 @@
 import { Component, createComponent } from "./createComponent"
-import { RequestHandler } from "express"
+import type { RequestHandler } from "express"
+
+export const _jsx = createComponent
 
 export const start = (root: Component<any, any>) => {
   mount(root, null)
@@ -12,9 +14,7 @@ const mount = <I, O>(c: Component<I, O>, deps: I) => {
   }
 }
 
-export const h = createComponent
-
-export declare namespace h {
+declare global {
   namespace JSX {
     export interface IntrinsicElements {
       server: ServerProps
