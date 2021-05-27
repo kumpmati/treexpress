@@ -40,9 +40,9 @@ export const createComponent = (
         mount: (deps) => {
           const r = deps.router as express.Router
           if (props.path) {
-            r.use(props.path, props.handler)
+            r.use(props.path, props.fn)
           } else {
-            r.use(props.handler)
+            r.use(props.fn)
           }
         },
         props,
@@ -56,7 +56,7 @@ export const createComponent = (
           const r = deps.router as express.Router
           r.all(props.path ?? "/", (req, res, next) => {
             if (req.method == props.method) {
-              props.handler(req, res, next)
+              props.fn(req, res, next)
               return
             }
             next()
@@ -76,7 +76,7 @@ export const createComponent = (
           const r = deps.router as express.Router
           r.all(props.path ?? "/", (req, res, next) => {
             if (req.method.toLowerCase() == tag) {
-              props.handler(req, res, next)
+              props.fn(req, res, next)
               return
             }
             next()

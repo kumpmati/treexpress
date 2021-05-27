@@ -1,7 +1,8 @@
 import { Component, createComponent } from "./createComponent"
 import type { RequestHandler } from "express"
 
-export const _jsx = createComponent
+const JSXPress = createComponent
+export default JSXPress
 
 export const start = (root: Component<any, any>) => {
   mount(root, null)
@@ -14,7 +15,7 @@ const mount = <I, O>(c: Component<I, O>, deps: I) => {
   }
 }
 
-declare global {
+declare namespace JSXPress {
   namespace JSX {
     export interface IntrinsicElements {
       server: ServerProps
@@ -34,6 +35,6 @@ type HTTPMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS"
 
 type ServerProps = { port: string | number }
 type RouteProps = { path: string }
-type HandlerProps = { path?: string; method: HTTPMethod; func: RequestHandler }
-type MiddleWareProps = { path?: string; handler: RequestHandler }
-type MethodProps = { path?: string; handler: RequestHandler }
+type HandlerProps = { path?: string; method: HTTPMethod; fn: RequestHandler }
+type MiddleWareProps = { path?: string; fn: RequestHandler }
+type MethodProps = { path?: string; fn: RequestHandler }

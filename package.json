@@ -4,6 +4,7 @@
   "description": "Write an express.js server using JSX",
   "main": "dist/index.js",
   "scripts": {
+    "preinstall": "npm run build",
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "nodemon",
@@ -29,13 +30,13 @@
   ],
   "homepage": "https://github.com/kumpmati/jsxpress#readme",
   "devDependencies": {
-    "@types/express": "^4.17.12",
     "@types/node": "^15.6.1",
     "nodemon": "^2.0.7",
     "ts-node": "^10.0.0",
     "typescript": "^4.2.4"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "@types/express": "^4.17.12",
     "express": "^4.17.1"
   }
 }
