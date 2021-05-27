@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "lib": ["esnext"],
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "strict": true,
+    "baseUrl": "src",
+    "outDir": "dist/",
+    "jsx": "react",
+    "jsxFactory": "h"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/*"]
+}
