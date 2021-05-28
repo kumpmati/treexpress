@@ -1,18 +1,16 @@
-# Puulvelin 🌲
+# Treexpress 🌲
 
 Write express.js servers in JSX format.
 
 **Note:** This project is highly experimental and very buggy! No not use it in production
 
-Puulvelin is a teeny tiny library built around express.js that allows you to write the basic parts of an express.js server using JSX tags. It supports simple function components along with the built-in tags. Puulvelin is **not** reactive, meaning the components are run only once at the start of the server, and will not react to changes in their props or contents.
-
-The name is a combination of the Finnish words puu ('tree') and palvelin ('server').
+Treexpress is a teeny tiny library built around express.js that allows you to write the basic parts of an express.js server using JSX tags. It supports simple function components along with the built-in tags. Treexpress is **not** reactive, meaning the components are run only once at the start of the server, and will not react to changes in their props or contents.
 
 ## Setup
 
-Install the package with npm: `npm install puulvelin`.
+Install the package with npm: `npm install treexpress`.
 
-In addition to `puulvelin`, you'll need to install the following packages:
+In addition to `treexpress`, you'll need to install the following packages:
 
 - TypeScript: `npm install --save-dev typescript`
 - Express.js: `npm install express`
@@ -27,7 +25,7 @@ Your `tsconfig.json` should include the following options:
     "esModuleInterop": true,
     "moduleResolution": "node",
     "jsx": "react",
-    "jsxFactory": "Puu"
+    "jsxFactory": "T"
   },
   // ...
 }
@@ -35,11 +33,11 @@ Your `tsconfig.json` should include the following options:
 
 ## Examples
 
-**Example of a simple Puulvelin server:**
+**Example of a simple Treexpress server:**
 
-```jsx
+```typescript
 // index.tsx
-import Puu, { start } from 'puulvelin'
+import T, { start } from 'treexpress'
 
 start(
   <server port={80}>
@@ -61,9 +59,9 @@ The example code has a single GET request handler at `http://localhost:80/api`, 
 
 **Same example using custom components:**
 
-```jsx
+```typescript
 // myComponent.tsx
-import Puu, { FC } from 'puulvelin'
+import T, { FC } from 'treexpress'
 
 export const Api: FC<{ path: string }> = ({ path }) => {
   return (
@@ -80,9 +78,9 @@ export const Api: FC<{ path: string }> = ({ path }) => {
 }
 ```
 
-```jsx
+```typescript
 // index.tsx
-import Puu, { start } from 'puulvelin'
+import T, { start } from 'treexpress'
 import { Api } from './myComponent'
 
 start(
