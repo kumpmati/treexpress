@@ -1,4 +1,4 @@
-import { CreateComponentFunc } from 'createComponent'
+import type { CreateComponentFunc } from '../types'
 import { Router } from 'express'
 
 export const createMiddleware: CreateComponentFunc<In> = (tag, props, children) => {

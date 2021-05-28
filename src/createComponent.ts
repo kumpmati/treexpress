@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { CreateComponentFunc } from './types'
 import { createHandler } from './components/handler'
 import { createMethod } from './components/method'
 import { createMiddleware } from './components/middleware'
@@ -33,17 +34,4 @@ export const createComponent: CreateComponentFunc = (tag, props, ...children) =>
     default:
       throw new Error('invalid tag')
   }
-}
-
-export type CreateComponentFunc<
-  I extends Record<string, any> | void = any,
-  O extends Record<string, any> | void = any,
-> = (tag: string | ((props: any) => any), props: any, children: any[]) => Component<I, O>
-
-export type Component<In, Out> = {
-  mount: (deps: In) => Out
-  unmount?: () => any
-  props: any
-  context?: any
-  children: Component<Out, any>[]
 }

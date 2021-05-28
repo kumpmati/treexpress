@@ -1,4 +1,4 @@
-import { CreateComponentFunc } from 'createComponent'
+import type { CreateComponentFunc } from '../types'
 import { Router } from 'express'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
