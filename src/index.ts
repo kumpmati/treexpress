@@ -2,9 +2,6 @@ import { Component, createComponent } from "./createComponent"
 import type { RequestHandler, Router } from "express"
 import express from "express"
 
-const Juice = createComponent
-export default Juice
-
 export const start = (root: Component<any, { router: Router }>) => {
   mount(root, null)
 }
@@ -16,7 +13,10 @@ const mount = <I, O>(c: Component<I, O>, deps: I) => {
   }
 }
 
-declare namespace Juice {
+const Puu = createComponent
+export default Puu
+
+declare namespace Puu {
   namespace JSX {
     export interface IntrinsicElements {
       server: ServerProps

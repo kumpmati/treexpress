@@ -1,16 +1,18 @@
-# Juicepress 🧃
+# Puulvelin
 
-Write express.js servers in JSX.
+Write express.js servers in JSX format.
 
-Juicepress is a small library that allows you to write the most basic parts of an express server using custom JSX tags. It supports simple custom components along with the built-in tags. It is not reactive, meaning the components are run only once at the start of the server. It is written in typescript and the typescript compiler is used to transpile the JSX.
+Puulvelin is a small library that allows you to write the most basic parts of an express server using custom JSX tags. It supports simple custom components along with the built-in tags. It is not reactive, meaning the components are run only once at the start of the server. It is written in typescript and the typescript compiler is used to transpile the JSX.
+
+The name is a combination of the Finnish words puu ('tree') and palvelin ('server').
 
 ## Example
 
-Example of a simple JuicePress server:
+Example of a simple Puulvelin server:
 
 ```jsx
 // index.tsx
-import Juice, { start } from "juicepress"
+import Puu, { start } from "puulvelin"
 
 start(
   <server port={80}>
@@ -34,7 +36,7 @@ Example of a custom component:
 
 ```jsx
 // myComponent.tsx
-import Juice from "juicepress"
+import Puu from "puulvelin"
 
 export const Api = ({ path }: { path: string }) => {
   return (
@@ -53,7 +55,7 @@ export const Api = ({ path }: { path: string }) => {
 
 ```jsx
 // index.tsx
-import Juice, { start } from "juicepress"
+import Puu, { start } from "puulvelin"
 import { Api } from "./myComponent"
 
 start(

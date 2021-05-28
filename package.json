@@ -1,7 +1,7 @@
 {
-  "name": "juicepress",
+  "name": "puulvelin",
   "version": "0.0.1",
-  "description": "Write an express.js server using JSX",
+  "description": "Write express.js servers using JSX",
   "main": "dist/index.js",
   "scripts": {
     "preinstall": "npm run build",
