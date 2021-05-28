@@ -1,9 +1,9 @@
 import { Component, createComponent } from "./createComponent"
-import type { RequestHandler, Response, Router } from "express"
+import type { RequestHandler, Router } from "express"
 import express from "express"
 
-const JSXPress = createComponent
-export default JSXPress
+const Juice = createComponent
+export default Juice
 
 export const start = (root: Component<any, { router: Router }>) => {
   mount(root, null)
@@ -16,7 +16,7 @@ const mount = <I, O>(c: Component<I, O>, deps: I) => {
   }
 }
 
-declare namespace JSXPress {
+declare namespace Juice {
   namespace JSX {
     export interface IntrinsicElements {
       server: ServerProps

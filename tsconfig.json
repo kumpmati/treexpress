@@ -14,7 +14,7 @@
     "baseUrl": "src",
     "outDir": "dist/",
     "jsx": "react",
-    "jsxFactory": "_jsx"
+    "jsxFactory": "Juice"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules/*"]
