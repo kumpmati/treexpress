@@ -2,7 +2,7 @@
 
 Write express.js servers in JSX.
 
-Juicepress is a small library that allows you to write the most basic parts of an express server using custom JSX tags. It is not reactive, meaning the components are run only once at the start of the server. It is written in typescript, and the typescript compiler is used to transpile the JSX.
+Juicepress is a small library that allows you to write the most basic parts of an express server using custom JSX tags. It supports simple custom components along with the built-in tags. It is not reactive, meaning the components are run only once at the start of the server. It is written in typescript and the typescript compiler is used to transpile the JSX.
 
 ## Example
 
