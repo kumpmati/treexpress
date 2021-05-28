@@ -2,6 +2,8 @@
 
 Write express.js servers in JSX format.
 
+**Note:** This project is highly experimental and very buggy! No not use it in production
+
 Puulvelin is a small library that allows you to write the most basic parts of an express server using custom JSX tags. It supports simple custom components along with the built-in tags. Puulvelin is **not** reactive, meaning the components are run only once at the start of the server. It is written in typescript and the typescript compiler is used to transpile the JSX.
 
 The name is a combination of the Finnish words puu ('tree') and palvelin ('server').
@@ -12,7 +14,7 @@ Example of a simple Puulvelin server:
 
 ```jsx
 // index.tsx
-import Puu, { start } from "puulvelin"
+import Puu, { start } from 'puulvelin'
 
 start(
   <server port={80}>
@@ -24,9 +26,9 @@ start(
         }}
       />
 
-      <get fn={(req, res) => res.status(200).json({ foo: "bar" })} />
+      <get fn={(req, res) => res.status(200).json({ foo: 'bar' })} />
     </router>
-  </server>
+  </server>,
 )
 ```
 
@@ -36,7 +38,7 @@ Example of a custom component:
 
 ```jsx
 // myComponent.tsx
-import Puu, { CustomComponent } from "puulvelin"
+import Puu, { CustomComponent } from 'puulvelin'
 
 export const Api: CustomComponent<{ path: string }> = ({ path }) => {
   return (
@@ -47,7 +49,7 @@ export const Api: CustomComponent<{ path: string }> = ({ path }) => {
           next()
         }}
       />
-      <get fn={(req, res) => res.status(200).json({ hello: "world" })} />
+      <get fn={(req, res) => res.status(200).json({ hello: 'world' })} />
     </router>
   )
 }
@@ -55,23 +57,19 @@ export const Api: CustomComponent<{ path: string }> = ({ path }) => {
 
 ```jsx
 // index.tsx
-import Puu, { start } from "puulvelin"
-import { Api } from "./myComponent"
+import Puu, { start } from 'puulvelin'
+import { Api } from './myComponent'
 
 start(
   <server port={80}>
     <Api path="/api" />
-  </server>
+  </server>,
 )
 ```
 
 ## Setup
 
-In addition to Puulvelin, you need the following dependencies:
-
-- `express`
-- `@types/express`
-- `typescript`
+You need to have typescript installed to use `puulvelin`. You can install it like so: `npm install --save-dev typescript`
 
 Your `tsconfig.json` should include the following options:
 
@@ -171,8 +169,6 @@ Example:
 ```jsx
 <get
   path="/:name"
-  fn={(req, res) =>
-    res.status(200).json({ message: `hello ${req.params.name}` })
-  }
+  fn={(req, res) => res.status(200).json({ message: `hello ${req.params.name}` })}
 />
 ```
