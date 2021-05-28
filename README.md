@@ -12,7 +12,10 @@ The name is a combination of the Finnish words puu ('tree') and palvelin ('serve
 
 Install the package with npm: `npm install puulvelin`.
 
-You must have typescript installed to use `puulvelin`. Install it with npm: `npm install --save-dev typescript`
+In addition to `puulvelin`, you'll need to install the following packages:
+
+- TypeScript: `npm install --save-dev typescript`
+- Express.js: `npm install express`
 
 Your `tsconfig.json` should include the following options:
 
