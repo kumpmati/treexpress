@@ -9,6 +9,7 @@ Juicepress is a small library that allows you to write the most basic parts of a
 Example of a simple JuicePress server:
 
 ```jsx
+// index.tsx
 import Juice, { start } from "juicepress"
 
 start(
@@ -28,6 +29,39 @@ start(
 ```
 
 The example code has a single GET request handler at `http://localhost:80/api/books`, and a logger middleware in the `/api` router that prints the request method and path
+
+Example of a custom component:
+
+```jsx
+// myComponent.tsx
+import Juice from "juicepress"
+
+export const Api = ({ path }) => {
+  return (
+    <router path={path}>
+      <middleware
+        fn={(req, res, next) => {
+          console.log(req.method, req.path)
+          next()
+        }}
+      />
+      <get fn={(req, res) => res.status(200).json({ hello: "world" })} />
+    </router>
+  )
+}
+```
+
+```jsx
+// index.tsx
+import Juice, { start } from "juicepress"
+import { Api } from "./myComponent"
+
+start(
+  <server port={80}>
+    <Api path="/api" />
+  </server>
+)
+```
 
 ## Custom JSX tags:
 
