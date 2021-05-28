@@ -27,6 +27,9 @@
     "express.js",
     "server"
   ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "author": "kumpmati",
   "license": "ISC",
   "bugs": {
