@@ -1,6 +1,6 @@
 {
-  "name": "puulvelin",
-  "version": "0.0.5",
+  "name": "treexpress",
+  "version": "0.0.6",
   "description": "Write express.js servers using JSX",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -20,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kumpmati/puulvelin.git"
+    "url": "git+https://github.com/kumpmati/treexpress.git"
   },
   "keywords": [
     "jsx",
@@ -30,9 +30,9 @@
   "author": "kumpmati",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kumpmati/puulvelin/issues"
+    "url": "https://github.com/kumpmati/treexpress/issues"
   },
-  "homepage": "https://github.com/kumpmati/puulvelin#readme",
+  "homepage": "https://github.com/kumpmati/treexpress#readme",
   "devDependencies": {
     "@types/node": "^15.6.1",
     "@typescript-eslint/eslint-plugin": "^4.25.0",

@@ -1,7 +1,7 @@
-import { createComponent } from './puulvelin'
+import { createComponent } from './treexpress'
 
-export * from './puulvelin'
+export * from './treexpress'
 export * from './jsxfactory'
 
-const Puu = createComponent
-export default Puu
+const T = createComponent
+export default T
