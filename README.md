@@ -75,7 +75,7 @@ In addition to Puulvelin, you need the following dependencies:
 
 Your `tsconfig.json` should include the following options:
 
-```json
+```js
 {
   "compilerOptions": {
     // ...
