@@ -1,12 +1,8 @@
-import { CreateComponentFunc } from "createComponent"
-import { Router } from "express"
+import { CreateComponentFunc } from 'createComponent'
+import { Router } from 'express'
 
-export const __createRouter: CreateComponentFunc<In, Out> = (
-  tag,
-  props,
-  children
-) => {
-  if (!props.path) throw new Error("path is missing")
+export const createRouter: CreateComponentFunc<In, Out> = (tag, props, children) => {
+  if (!props.path) throw new Error('path is missing')
 
   return {
     mount: ({ router }) => {

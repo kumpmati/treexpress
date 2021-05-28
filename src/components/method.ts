@@ -1,16 +1,13 @@
-import { CreateComponentFunc } from "createComponent"
-import { Router } from "express"
+import { CreateComponentFunc } from 'createComponent'
+import { Router } from 'express'
 
-export const __createMethod: CreateComponentFunc<In, any> = (
-  tag,
-  props,
-  children
-) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const createMethod: CreateComponentFunc<In> = (tag, props, children) => {
   const { path, fn, req: reqFn, res: resFn, next: nextFn } = props
 
   return {
     mount: ({ router }) => {
-      router.all(path ?? "/", (req, res, next) => {
+      router.all(path ?? '/', (req, res, next) => {
         if (req.method.toLowerCase() === tag) {
           if (fn) {
             fn(req, res, next)

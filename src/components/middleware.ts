@@ -1,11 +1,7 @@
-import { CreateComponentFunc } from "createComponent"
-import { Router } from "express"
+import { CreateComponentFunc } from 'createComponent'
+import { Router } from 'express'
 
-export const __createMiddleware: CreateComponentFunc<In, any> = (
-  tag,
-  props,
-  children
-) => {
+export const createMiddleware: CreateComponentFunc<In> = (tag, props, children) => {
   const { path, fn } = props
 
   return {

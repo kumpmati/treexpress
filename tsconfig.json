@@ -12,9 +12,7 @@
     "sourceMap": true,
     "strict": true,
     "baseUrl": "src",
-    "outDir": "dist/",
-    "jsx": "react",
-    "jsxFactory": "Puu"
+    "outDir": "./lib"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules/*"]

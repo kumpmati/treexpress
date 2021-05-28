@@ -1,8 +1,9 @@
-import { Component, createComponent } from "./createComponent"
-import type { RequestHandler, Router } from "express"
-import express from "express"
+/* eslint-disable @typescript-eslint/no-namespace */
+import { Component, createComponent } from './createComponent'
+import type { RequestHandler, Router } from 'express'
+import express from 'express'
 
-export const start = (root: Component<any, { router: Router }>) => {
+export const start = (root: Component<null, { router: Router }>): void => {
   mount(root, null)
 }
 
@@ -33,9 +34,9 @@ declare namespace Puu {
   }
 }
 
-export type CustomComponent<T = {}> = <I, O>(props: T) => Component<I, O>
+export type CustomComponent<T = unknown> = <I, O>(props: T) => Component<I, O>
 
-type HTTPMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS"
+type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS'
 
 type ServerProps = { port: string | number }
 type RouteProps = { path: string }
@@ -45,5 +46,5 @@ type MethodProps =
   | { path?: string; fn: RequestHandler }
   | { path?: string; req?: ReqFunc; res?: ResFunc; next?: RequestHandler }
 
-type ReqFunc = (req: express.Request) => any
-type ResFunc = (res: express.Response) => any
+type ReqFunc = (req: express.Request) => void
+type ResFunc = (res: express.Response) => void
