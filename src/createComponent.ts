@@ -21,6 +21,7 @@ export const createComponent: CreateComponentFunc = (
       return __createRouter(tag, props, children)
 
     case "middleware":
+    case "use":
       return __createMiddleware(tag, props, children)
 
     case "handler":

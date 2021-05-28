@@ -23,6 +23,7 @@ declare namespace Puu {
       router: RouteProps
       handler: HandlerProps
       middleware: MiddleWareProps
+      use: MiddleWareProps
 
       get: MethodProps
       post: MethodProps
@@ -31,6 +32,8 @@ declare namespace Puu {
     }
   }
 }
+
+export type CustomComponent<T = {}> = <I, O>(props: T) => Component<I, O>
 
 type HTTPMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS"
 

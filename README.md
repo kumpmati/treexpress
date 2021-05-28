@@ -17,7 +17,7 @@ import Puu, { start } from "puulvelin"
 start(
   <server port={80}>
     <router path="/api">
-      <middleware
+      <use
         fn={(req, res, next) => {
           console.log(req.method, req.path)
           next()
@@ -36,12 +36,12 @@ Example of a custom component:
 
 ```jsx
 // myComponent.tsx
-import Puu from "puulvelin"
+import Puu, { CustomComponent } from "puulvelin"
 
-export const Api = ({ path }: { path: string }) => {
+export const Api: CustomComponent<{ path: string }> = ({ path }) => {
   return (
     <router path={path}>
-      <middleware
+      <use
         fn={(req, res, next) => {
           console.log(req.method, req.path)
           next()
@@ -106,6 +106,8 @@ The accepted request method for this handler. Currently supports only one method
 A normal express.js request handler function. This function is called every time a request to its path is received.
 
 ### `middleware`
+
+### `use`
 
 Allows you to attach express.js middleware to a router. Optionally you can also define the relative path of the middleware.
 
