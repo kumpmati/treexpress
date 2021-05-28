@@ -78,13 +78,14 @@ Your `tsconfig.json` should include the following options:
 ```json
 {
   "compilerOptions": {
-    ...other options
+    // ...
 
     "esModuleInterop": true,
     "moduleResolution": "node",
     "jsx": "react",
     "jsxFactory": "Puu"
   },
+  // ...
 }
 
 ```
