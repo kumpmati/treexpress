@@ -1,6 +1,6 @@
 {
   "name": "puulvelin",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Write express.js servers using JSX",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
