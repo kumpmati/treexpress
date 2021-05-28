@@ -1,4 +1,4 @@
-# Juicepress
+# Juicepress 🧃
 
 Write express.js servers in JSX.
 
