@@ -2,7 +2,7 @@
 
 Write express.js servers in JSX format.
 
-Puulvelin is a small library that allows you to write the most basic parts of an express server using custom JSX tags. It supports simple custom components along with the built-in tags. It is not reactive, meaning the components are run only once at the start of the server. It is written in typescript and the typescript compiler is used to transpile the JSX.
+Puulvelin is a small library that allows you to write the most basic parts of an express server using custom JSX tags. It supports simple custom components along with the built-in tags. Puulvelin is **not** reactive, meaning the components are run only once at the start of the server. It is written in typescript and the typescript compiler is used to transpile the JSX.
 
 The name is a combination of the Finnish words puu ('tree') and palvelin ('server').
 
@@ -65,10 +65,10 @@ start(
 )
 ```
 
-
 ## Setup
 
 In addition to Puulvelin, you need the following dependencies:
+
 - `express`
 - `@types/express`
 - `typescript`
@@ -79,7 +79,7 @@ Your `tsconfig.json` should include the following options:
 {
   "compilerOptions": {
     ...other options
-    
+
     "esModuleInterop": true,
     "moduleResolution": "node",
     "jsx": "react",
