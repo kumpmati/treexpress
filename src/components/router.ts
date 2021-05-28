@@ -1,4 +1,4 @@
-import type { CreateComponentFunc } from '../types'
+import type { CreateComponentFunc } from '../jsxfactory'
 import { Router } from 'express'
 
 export const createRouter: CreateComponentFunc<In, Out> = (tag, props, children) => {

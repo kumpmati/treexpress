@@ -1,4 +1,4 @@
-import type { CreateComponentFunc } from '../types'
+import type { CreateComponentFunc } from '../jsxfactory'
 import express from 'express'
 
 export const createServer: CreateComponentFunc<never, Out> = (tag, props, children) => {

@@ -1,8 +1,17 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import express, { RequestHandler } from 'express'
 
-declare namespace Puu {
+declare global {
   namespace JSX {
+    type Component<In, Out> = {
+      mount: (deps: In) => Out
+      unmount?: () => any
+      props: any
+      context?: any
+      children: Component<Out, any>[]
+    }
+
     export interface IntrinsicElements {
       server: ServerProps
       router: RouteProps
@@ -18,22 +27,13 @@ declare namespace Puu {
   }
 }
 
+export type CustomComponent<T = unknown> = <I, O>(props: T) => JSX.Component<I, O>
 export type CreateComponentFunc<
   I extends Record<string, any> | void = any,
   O extends Record<string, any> | void = any,
-> = (tag: string | ((props: any) => any), props: any, children: any[]) => Component<I, O>
+> = (tag: string | ((props: any) => any), props: any, children: any[]) => JSX.Component<I, O>
 
-export type CustomComponent<T = unknown> = <I, O>(props: T) => Component<I, O>
-
-type Component<In, Out> = {
-  mount: (deps: In) => Out
-  unmount?: () => any
-  props: any
-  context?: any
-  children: Component<Out, any>[]
-}
-
-type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS'
+export type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS'
 
 type ServerProps = { port: string | number }
 type RouteProps = { path: string }

@@ -9,11 +9,15 @@
     "preserveConstEnums": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
+    "allowJs": false,
     "baseUrl": "src",
-    "outDir": "./lib"
+    "outDir": "./lib",
+    "jsx": "react",
+    "jsxFactory": "h"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules/*"]
+  "include": ["src"],
+  "exclude": ["node_modules", "lib"]
 }

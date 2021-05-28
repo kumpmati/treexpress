@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { CreateComponentFunc } from './types'
+
+import type { CreateComponentFunc } from './jsxfactory'
+import type { Router } from 'express'
 import { createHandler } from './components/handler'
 import { createMethod } from './components/method'
 import { createMiddleware } from './components/middleware'
@@ -18,8 +20,8 @@ export const createComponent: CreateComponentFunc = (tag, props, ...children) =>
     case 'router':
       return createRouter(tag, props, children)
 
-    case 'middleware':
     case 'use':
+    case 'middleware':
       return createMiddleware(tag, props, children)
 
     case 'handler':
@@ -33,5 +35,16 @@ export const createComponent: CreateComponentFunc = (tag, props, ...children) =>
 
     default:
       throw new Error('invalid tag')
+  }
+}
+
+export const start = (root: JSX.Component<null, { router: Router }>): void => {
+  mount(root, null)
+}
+
+const mount = <I, O>(c: JSX.Component<I, O>, deps: I) => {
+  const result = c.mount(deps)
+  for (const child of c.children) {
+    mount(child, result)
   }
 }
