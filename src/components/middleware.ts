@@ -1,7 +1,8 @@
 import type { CreateComponentFunc } from '../jsxfactory'
-import { Router } from 'express'
+import { RequestHandler, Router } from 'express'
+import { Server } from 'http'
 
-export const createMiddleware: CreateComponentFunc<In> = (tag, props, children) => {
+export const createMiddleware: CreateComponentFunc<Props, In, Out> = (tag, props, children) => {
   const { path, fn } = props
 
   return {
@@ -17,6 +18,14 @@ export const createMiddleware: CreateComponentFunc<In> = (tag, props, children) 
   }
 }
 
+interface Props {
+  path?: string
+  fn: RequestHandler
+}
+
 interface In {
   router: Router
+  server: Server
 }
+
+type Out = void

@@ -1,7 +1,8 @@
 import type { CreateComponentFunc } from '../jsxfactory'
 import { Router } from 'express'
+import type { Server } from 'http'
 
-export const createRouter: CreateComponentFunc<In, Out> = (tag, props, children) => {
+export const createRouter: CreateComponentFunc<Props, In, Out> = (tag, props, children) => {
   if (!props.path) throw new Error('path is missing')
 
   return {
@@ -15,8 +16,13 @@ export const createRouter: CreateComponentFunc<In, Out> = (tag, props, children)
   }
 }
 
+interface Props {
+  path: string
+}
+
 interface In {
   router: Router
+  server: Server
 }
 interface Out {
   router: Router

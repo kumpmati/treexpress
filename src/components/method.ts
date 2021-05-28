@@ -1,8 +1,8 @@
 import type { CreateComponentFunc } from '../jsxfactory'
-import { Router } from 'express'
+import { RequestHandler, Router } from 'express'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const createMethod: CreateComponentFunc<In> = (tag, props, children) => {
+export const createMethod: CreateComponentFunc<Props, In, Out> = (tag, props, children) => {
   const { path, fn, req: reqFn, res: resFn, next: nextFn } = props
 
   return {
@@ -27,6 +27,16 @@ export const createMethod: CreateComponentFunc<In> = (tag, props, children) => {
   }
 }
 
+interface Props {
+  path?: string
+  fn?: RequestHandler
+  req?: (req: Express.Request) => void
+  res?: (res: Express.Response) => void
+  next?: RequestHandler
+}
+
 interface In {
   router: Router
 }
+
+type Out = void

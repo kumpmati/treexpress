@@ -18,6 +18,7 @@ declare global {
       handler: HandlerProps
       middleware: MiddleWareProps
       use: MiddleWareProps
+      dependency: DependencyProps
 
       get: MethodProps
       post: MethodProps
@@ -27,11 +28,13 @@ declare global {
   }
 }
 
+export type CreateComponentFunc<P extends Record<string, any>, I, O> = (
+  tag: string | ((props: P) => JSX.Component<I, O>),
+  props: P,
+  children: JSX.Component<O, any>[],
+) => JSX.Component<I, O>
+
 export type FC<T = unknown> = <I, O>(props: T) => JSX.Component<I, O>
-export type CreateComponentFunc<
-  I extends Record<string, any> | void = any,
-  O extends Record<string, any> | void = any,
-> = (tag: string | ((props: any) => any), props: any, children: any[]) => JSX.Component<I, O>
 
 export type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS'
 
@@ -39,6 +42,7 @@ type ServerProps = { port: string | number }
 type RouteProps = { path: string }
 type HandlerProps = { path?: string; method: HTTPMethod; fn: RequestHandler }
 type MiddleWareProps = { path?: string; fn: RequestHandler }
+type DependencyProps = { fn: (deps: any) => any }
 type MethodProps =
   | { path?: string; fn: RequestHandler }
   | { path?: string; req?: ReqFunc; res?: ResFunc; next?: RequestHandler }
