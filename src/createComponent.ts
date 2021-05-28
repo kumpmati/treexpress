@@ -1,97 +1,46 @@
-import express from "express"
+import { __createHandler } from "./components/handler"
+import { __createMethod } from "./components/method"
+import { __createMiddleware } from "./components/middleware"
+import { __createRouter } from "./components/router"
+import { __createServer } from "./components/server"
 
-export const createComponent = (
-  tag: string | Function,
-  props: any,
-  ...children: any[]
-): Component<any, any> => {
+export const createComponent: CreateComponentFunc = (
+  tag,
+  props,
+  ...children
+) => {
   if (typeof tag === "function") {
     return tag(props)
   }
 
   switch (tag) {
-    case "server": {
-      return {
-        mount: () => {
-          const app = express()
+    case "server":
+      return __createServer(tag, props, children)
 
-          app.listen(props.port, () => console.log("listening:", props.port))
-          return { router: app }
-        },
-        props,
-        children,
-      }
-    }
+    case "router":
+      return __createRouter(tag, props, children)
 
-    case "router": {
-      return {
-        mount: (deps) => {
-          const r = express.Router()
-          deps.router.use(props.path, r)
-          return { router: r }
-        },
-        props,
-        children,
-      }
-    }
+    case "middleware":
+      return __createMiddleware(tag, props, children)
 
-    case "middleware": {
-      return {
-        mount: (deps) => {
-          const r = deps.router as express.Router
-          if (props.path) {
-            r.use(props.path, props.fn)
-          } else {
-            r.use(props.fn)
-          }
-        },
-        props,
-        children,
-      }
-    }
-
-    case "handler": {
-      return {
-        mount: (deps) => {
-          const r = deps.router as express.Router
-          r.all(props.path ?? "/", (req, res, next) => {
-            if (req.method == props.method) {
-              props.fn(req, res, next)
-              return
-            }
-            next()
-          })
-        },
-        props,
-        children,
-      }
-    }
+    case "handler":
+      return __createHandler(tag, props, children)
 
     case "get":
     case "post":
     case "put":
-    case "delete": {
-      return {
-        mount: (deps) => {
-          const r = deps.router as express.Router
-          r.all(props.path ?? "/", (req, res, next) => {
-            if (req.method.toLowerCase() == tag) {
-              props.fn(req, res, next)
-              return
-            }
-            next()
-          })
-        },
-        props,
-        children,
-      }
-    }
+    case "delete":
+      return __createMethod(tag, props, children)
 
-    default: {
+    default:
       throw new Error("invalid tag")
-    }
   }
 }
+
+export type CreateComponentFunc<
+  I extends Record<string, any> = any,
+  O extends Record<string, any> = any
+> = (tag: string | Function, props: any, children: any[]) => Component<I, O>
 
 export type Component<In, Out> = {
   mount: (deps: In) => Out

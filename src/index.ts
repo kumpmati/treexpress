@@ -1,10 +1,11 @@
 import { Component, createComponent } from "./createComponent"
-import type { RequestHandler } from "express"
+import type { RequestHandler, Response, Router } from "express"
+import express from "express"
 
 const JSXPress = createComponent
 export default JSXPress
 
-export const start = (root: Component<any, any>) => {
+export const start = (root: Component<any, { router: Router }>) => {
   mount(root, null)
 }
 
@@ -37,4 +38,9 @@ type ServerProps = { port: string | number }
 type RouteProps = { path: string }
 type HandlerProps = { path?: string; method: HTTPMethod; fn: RequestHandler }
 type MiddleWareProps = { path?: string; fn: RequestHandler }
-type MethodProps = { path?: string; fn: RequestHandler }
+type MethodProps =
+  | { path?: string; fn: RequestHandler }
+  | { path?: string; req?: ReqFunc; res?: ResFunc; next?: RequestHandler }
+
+type ReqFunc = (req: express.Request) => any
+type ResFunc = (res: express.Response) => any
