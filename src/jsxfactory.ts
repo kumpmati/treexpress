@@ -27,7 +27,7 @@ declare global {
   }
 }
 
-export type CustomComponent<T = unknown> = <I, O>(props: T) => JSX.Component<I, O>
+export type FC<T = unknown> = <I, O>(props: T) => JSX.Component<I, O>
 export type CreateComponentFunc<
   I extends Record<string, any> | void = any,
   O extends Record<string, any> | void = any,

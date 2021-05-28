@@ -4,13 +4,35 @@ Write express.js servers in JSX format.
 
 **Note:** This project is highly experimental and very buggy! No not use it in production
 
-Puulvelin is a small library that allows you to write the most basic parts of an express server using custom JSX tags. It supports simple custom components along with the built-in tags. Puulvelin is **not** reactive, meaning the components are run only once at the start of the server. It is written in typescript and the typescript compiler is used to transpile the JSX.
+Puulvelin is a teeny tiny library built around express.js that allows you to write the basic parts of an express.js server using JSX tags. It supports simple function components along with the built-in tags. Puulvelin is **not** reactive, meaning the components are run only once at the start of the server, and will not react to changes in their props or contents.
 
 The name is a combination of the Finnish words puu ('tree') and palvelin ('server').
 
-## Example
+## Setup
 
-Example of a simple Puulvelin server:
+Install the package with npm: `npm install puulvelin`.
+
+You must have typescript installed to use `puulvelin`. Install it with npm: `npm install --save-dev typescript`
+
+Your `tsconfig.json` should include the following options:
+
+```js
+{
+  "compilerOptions": {
+    // ...
+
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "jsxFactory": "Puu"
+  },
+  // ...
+}
+```
+
+## Examples
+
+**Example of a simple Puulvelin server:**
 
 ```jsx
 // index.tsx
@@ -32,15 +54,15 @@ start(
 )
 ```
 
-The example code has a single GET request handler at `http://localhost:80/api/books`, and a logger middleware in the `/api` router that prints the request method and path
+The example code has a single GET request handler at `http://localhost:80/api`, and a logger middleware in the `/api` router that prints the request method and path
 
-Example of a custom component:
+**Same example using custom components:**
 
 ```jsx
 // myComponent.tsx
-import Puu, { CustomComponent } from 'puulvelin'
+import Puu, { FC } from 'puulvelin'
 
-export const Api: CustomComponent<{ path: string }> = ({ path }) => {
+export const Api: FC<{ path: string }> = ({ path }) => {
   return (
     <router path={path}>
       <use
@@ -67,108 +89,82 @@ start(
 )
 ```
 
-## Setup
+You can probably see the resemblance to React, with the props and returning JSX and such. Just keep in mind that this is _not_ React!
 
-You need to have typescript installed to use `puulvelin`. You can install it like so: `npm install --save-dev typescript`
+## Reference
 
-Your `tsconfig.json` should include the following options:
+### Server
 
-```js
-{
-  "compilerOptions": {
-    // ...
+The main express App that all routers and handlers are attached to. Every router and handler must be inside the server tag to work.
 
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "jsx": "react",
-    "jsxFactory": "Puu"
-  },
-  // ...
-}
-
-```
-
-## Custom JSX tags:
-
-### `server`
-
-The main express App that all routers and handlers are attached to
+Tag: `server`
 
 Props:
 
-#### `port`: number | string
+- `port`: number | string
 
-The port that the server runs on
+  The port that the server runs on
 
-### `router`
+### Routers
 
-An express.js Router instance, you can attach request handlers and other routers to it
+Standard express.js Router. You can nest these as deep as you want, and attach request handlers and middleware to it.
 
-Props:
-
-#### `path`: string
-
-When attaching the router to its parent, it will be attached at this path relative to the parent.
-
-### `handler`
-
-A generic request handler. You can define which request methods it accepts, and a handler function that handles the requests. Optionally you can also define the path of the handler relative to its parent.
+Tag: `router`
 
 Props:
 
-#### `path`?: string
+- `path`: string
 
-Path to attach the handler to. Relative to its parent router. If unspecified, the path is `/`.
+  The router will be attached to this path, appending the path to the router's parent's path.
 
-#### `method`: "GET" | "POST" | "PUT" | "DELETE"
+### Request handlers
 
-The accepted request method for this handler. Currently supports only one method at a time
+Standard express.js request handler. You can define which request method it accepts, and a handler function that handles the requests. Optionally you can also define a path for the request handler.
 
-#### `fn`: (req, res, next) => any
-
-A normal express.js request handler function. This function is called every time a request to its path is received.
-
-### `middleware`
-
-### `use`
-
-Allows you to attach express.js middleware to a router. Optionally you can also define the relative path of the middleware.
+Tag: `handler`
 
 Props:
 
-#### `path`?: string
+- `path`?: string
 
-Path to attach the middleware to. Relative to its parent router. If unspecified, the path is `/`.
+  Path to attach the handler to. Relative to its parent router. If unspecified, the path is `/`.
 
-#### `fn`: (req, res, next) => any
+- `method`: "GET" | "POST" | "PUT" | "DELETE"
 
-Any normal express.js middleware function.
+  The accepted request method for this handler. Currently supports only one method at a time
 
-### `get`
+- `fn`: (req, res, next) => any
 
-### `post`
+  An express.js request handler function. This function is called every time a request to the handler's path is received.
 
-### `put`
+### Method-specifig request handlers
 
-### `delete`
+Alternatively to the `handler` tag, you can use the HTTP method name (in lowercase) as the tag name. It works the same way as the `handler` tag, as in you can define an optional path and a handler function.
 
-Each of these is a single JSX tag, which accepts a handler function and optionally a path. It is the same concept as the `handler` tag, but instead uses the accepted request method as the tag name.
+Tags: `get`, `post`, `put`, `delete`
 
 Props:
 
-#### `path`?: string
+- `path`?: string
 
-Path to attach the handler to. Relative to its parent router. If unspecified, the path is `/`.
+  Path to attach the handler to. Relative to its parent router. If unspecified, the path is `/`.
 
-#### `fn`: (req, res, next) => any
+- `fn`: (req, res, next) => any
 
-Normal express.js request handler. This function is called every time a request with the same method as the tag name is received at the given path.
+  Normal express.js request handler. This function is called every time a request with the same method as the tag name is received at the given path.
 
-Example:
+### Middleware
 
-```jsx
-<get
-  path="/:name"
-  fn={(req, res) => res.status(200).json({ message: `hello ${req.params.name}` })}
-/>
-```
+Allows you to attach an express.js middleware function to a router (or the server). Optionally you can also define a path for the middleware.
+
+Tags: `use`, `middleware`
+
+Props:
+
+- `path`?: string
+
+  Path to attach the middleware to. Relative to its parent router. If unspecified, the path is `/`.
+
+- `fn`: (req, res, next) => any
+
+  Any normal express.js middleware function.
