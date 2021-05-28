@@ -65,6 +65,30 @@ start(
 )
 ```
 
+
+## Setup
+
+In addition to Puulvelin, you need the following dependencies:
+- `express`
+- `@types/express`
+- `typescript`
+
+Your `tsconfig.json` should include the following options:
+
+```json
+{
+  "compilerOptions": {
+    ...other options
+    
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "jsxFactory": "Puu"
+  },
+}
+
+```
+
 ## Custom JSX tags:
 
 ### `server`
