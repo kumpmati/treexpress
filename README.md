@@ -36,7 +36,7 @@ Example of a custom component:
 // myComponent.tsx
 import Juice from "juicepress"
 
-export const Api = ({ path }) => {
+export const Api = ({ path }: { path: string }) => {
   return (
     <router path={path}>
       <middleware
