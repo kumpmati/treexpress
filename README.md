@@ -35,7 +35,7 @@ Your `tsconfig.json` should include the following options:
 
 **Example of a simple Treexpress server:**
 
-```typescript
+```jsx
 // index.tsx
 import T, { start } from 'treexpress'
 
@@ -59,7 +59,7 @@ The example code has a single GET request handler at `http://localhost:80/api`, 
 
 **Same example using custom components:**
 
-```typescript
+```jsx
 // myComponent.tsx
 import T, { FC } from 'treexpress'
 
@@ -78,7 +78,7 @@ export const Api: FC<{ path: string }> = ({ path }) => {
 }
 ```
 
-```typescript
+```jsx
 // index.tsx
 import T, { start } from 'treexpress'
 import { Api } from './myComponent'
