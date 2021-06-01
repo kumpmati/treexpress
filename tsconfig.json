@@ -14,9 +14,9 @@
     "strict": true,
     "allowJs": false,
     "baseUrl": "src",
-    "outDir": "./lib",
+    "outDir": "./dist",
     "jsx": "react",
-    "jsxFactory": "h"
+    "jsxFactory": "T.createElement"
   },
   "include": ["src"],
   "exclude": ["node_modules", "lib"]
