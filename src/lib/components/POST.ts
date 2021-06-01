@@ -12,7 +12,7 @@ import { ERRORS } from '../../lib/constants/errors'
 const POST: FC<HandlerProps, ServerContext> = (props) => ({
   type: 'POST handler',
   run: (ctx) => {
-    const parent = ctx.router ?? ctx.app
+    const parent = ctx.parent ?? ctx.app
     if (!parent) throw ERRORS.OUTSIDE_SERVER
 
     parent.post(props.path ?? '/', ...asArray(props.fn))

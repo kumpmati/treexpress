@@ -12,7 +12,7 @@ import { ERRORS } from '../../lib/constants/errors'
 const OPTIONS: FC<HandlerProps, ServerContext> = (props) => ({
   type: 'handler',
   run: (ctx) => {
-    const parent = ctx.router ?? ctx.app
+    const parent = ctx.parent ?? ctx.app
     if (!parent) throw ERRORS.OUTSIDE_SERVER
 
     parent.options(props.path ?? '/', ...asArray(props.fn))

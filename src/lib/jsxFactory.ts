@@ -4,7 +4,7 @@ export namespace T {
     const rendered = func({ children, ...props }) // run the component
 
     return {
-      type: rendered.type,
+      type: func.name,
       run: rendered.run,
       props,
       children,

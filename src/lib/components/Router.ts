@@ -1,4 +1,5 @@
 import express from 'express'
+import { ERRORS } from '../../lib/constants/errors'
 import { ServerContext } from '../../index'
 import { FC, T } from '../jsxFactory'
 
@@ -10,10 +11,11 @@ import { FC, T } from '../jsxFactory'
 const Router: FC<RouterProps, ServerContext> = (props) => ({
   type: 'router',
   run: (ctx) => {
-    const parent = ctx.router ?? ctx.app // use parent router if available, otherwise use server
+    const parent = ctx.parent ?? ctx.app
+    if (!parent) throw ERRORS.OUTSIDE_SERVER
 
     const r = express.Router()
-    parent.use(props.path ?? '/', r)
+    parent?.use(props.path, r)
 
     return {
       router: r, // pass r as the router for children
@@ -24,6 +26,6 @@ const Router: FC<RouterProps, ServerContext> = (props) => ({
 export default Router
 
 type RouterProps = {
-  path?: string
+  path: string
   children?: T.Element | T.Element[]
 }

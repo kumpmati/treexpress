@@ -11,7 +11,9 @@ import { ERRORS } from '../../lib/constants/errors'
 const Param: FC<HandlerProps, ServerContext> = (props) => ({
   type: 'Param',
   run: (ctx) => {
-    const parent = ctx.router ?? ctx.app
+    const parent = ctx.parent ?? ctx.app
+    if (!parent) throw ERRORS.OUTSIDE_SERVER
+
     parent.param(props.param, props.fn)
   },
   props,

@@ -15,6 +15,7 @@ const Server: FC<ServerProps> = (props) => ({
     return {
       app,
       http,
+      parent: app,
     }
   },
   props,

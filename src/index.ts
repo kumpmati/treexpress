@@ -9,16 +9,18 @@ export default T
  * @param root
  * @param ctx
  */
-export const start = (root: T.Element, ctx: { [k: string]: unknown } = {}): void => {
-  evalNode(root, ctx)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const start = <Ctx = any>(root: T.Element, ctx?: Ctx): void => {
+  evalNode(root, ctx ?? {})
 }
 
-const evalNode = (node: T.Element, ctx: unknown) => {
-  const newCtx = node.run(ctx) ?? ctx // keep parent context if node returns nothing
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const evalNode = (node: T.Element, ctx: any) => {
+  const newCtx = node.run(ctx)
 
   if (Array.isArray(node.children)) {
     for (const child of node.children) {
-      evalNode(child, newCtx)
+      evalNode(child, { ...ctx, parent: newCtx }) // pass return value of node as parent in children context
     }
   }
 }
@@ -26,5 +28,5 @@ const evalNode = (node: T.Element, ctx: unknown) => {
 export type ServerContext = {
   app: express.Application
   http: Server
-  router?: express.Router
+  parent?: express.Router
 }
