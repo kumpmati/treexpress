@@ -1,6 +1,7 @@
 import express from 'express'
-import { Server } from 'http'
+import type { Server as HttpServer } from 'http'
 import { T } from './jsxFactory'
+
 export default T
 
 /**
@@ -34,6 +35,6 @@ const evalNode = async (node: T.Element, ctx: any) => {
 
 export type ServerContext = {
   app: express.Application
-  http: Server
+  http: HttpServer
   router?: express.Router
 }

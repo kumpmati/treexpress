@@ -2,8 +2,8 @@
   "name": "treexpress",
   "version": "0.0.9",
   "description": "Write express.js servers using JSX",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "scripts": {
     "start": "node dist/test.js",
     "build": "tsc",
@@ -17,7 +17,7 @@
     "postversion": "git push && git push --tags"
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "repository": {
     "type": "git",

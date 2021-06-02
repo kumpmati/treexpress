@@ -4,6 +4,11 @@ import { asArray } from '../util'
 import { ERRORS } from '../../lib/constants/errors'
 import { FC } from '../../lib/jsxFactory'
 
+/**
+ * Attaches middleware to its parent router (or server if no parent router is found)
+ * @param props
+ * @returns
+ */
 const Use: FC<UseProps, ServerContext> = (props) => ({
   type: 'Use JSX element',
   run: (ctx) => {

@@ -3,6 +3,11 @@ import { createServer } from 'http'
 import T, { ServerContext } from '../index'
 import { FC } from '../jsxFactory'
 
+/**
+ * Main server component. Starts an express.js server, and passes the server down to its children
+ * @param props
+ * @returns
+ */
 const Server: FC<ServerProps> = (props) => ({
   type: 'Server JSX element',
   run: async () => {
@@ -21,9 +26,13 @@ const Server: FC<ServerProps> = (props) => ({
       http,
     }
 
+    // additional logic before server is started
     await props.init?.(ctx)
 
-    setImmediate(() => http.listen(props.port, () => props.onListen?.(ctx)))
+    const port = props.port ?? process.env.PORT
+    if (!port) console.warn('WARN: no port defined for server')
+
+    setImmediate(() => http.listen(port, () => props.onListen?.(ctx)))
 
     return ctx
   },
