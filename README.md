@@ -2,7 +2,7 @@
 
 Write express.js servers in JSX format.
 
-**Note:** This project is highly experimental and very buggy! Its api might completely change in the next versions. No not use it in production!
+**Note:** This project is highly experimental and very buggy! Its api might completely change in the next versions. Do not use it in production!
 
 Treexpress is a teeny tiny library built around express.js that allows you to write the basic parts of an express.js server using JSX tags. It supports simple function components along with the built-in tags. Treexpress is **not** reactive, meaning the components are run only once at the start of the server, and will not react to changes in their props or contents.
 
