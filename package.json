@@ -17,8 +17,7 @@
     "postversion": "git push && git push --tags"
   },
   "files": [
-    "dist",
-    "dist/builtin"
+    "dist"
   ],
   "repository": {
     "type": "git",
