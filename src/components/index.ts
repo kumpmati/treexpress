@@ -9,5 +9,6 @@ import PUT from './PUT'
 import Router from './Router'
 import Server from './Server'
 import Use from './Use'
+import Func from './Func'
 
-export { DELETE, GET, Handler, OPTIONS, Param, PATCH, POST, PUT, Router, Server, Use }
+export { DELETE, GET, Handler, OPTIONS, Param, PATCH, POST, PUT, Router, Server, Use, Func }
