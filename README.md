@@ -25,7 +25,7 @@ Your `tsconfig.json` should include the following options:
     "esModuleInterop": true,
     "moduleResolution": "node",
     "jsx": "react",
-    "jsxFactory": "T"
+    "jsxFactory": "T.createElement",
   },
   // ...
 }
