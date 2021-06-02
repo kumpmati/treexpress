@@ -11,14 +11,14 @@ import { FC, T } from '../jsxFactory'
 const Router: FC<RouterProps, ServerContext> = (props) => ({
   type: 'router',
   run: (ctx) => {
-    const parent = ctx.parent ?? ctx.app
+    const parent = ctx.router ?? ctx.app
     if (!parent) throw ERRORS.OUTSIDE_SERVER
 
     const r = express.Router()
-    parent?.use(props.path, r)
+    parent.use(props.path, r)
 
     return {
-      router: r, // pass r as the router for children
+      router: r,
     }
   },
   props,

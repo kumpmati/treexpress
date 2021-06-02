@@ -12,7 +12,7 @@ import { ERRORS } from '../../lib/constants/errors'
 const GET: FC<HandlerProps, ServerContext> = (props) => ({
   type: 'GET handler',
   run: (ctx) => {
-    const parent = ctx.parent ?? ctx.app
+    const parent = ctx.router ?? ctx.app
     if (!parent) throw ERRORS.OUTSIDE_SERVER
 
     parent.get(props.path ?? '/', ...asArray(props.fn))

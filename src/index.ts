@@ -16,11 +16,11 @@ export const start = <Ctx = any>(root: T.Element, ctx?: Ctx): void => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const evalNode = (node: T.Element, ctx: any) => {
-  const newCtx = node.run(ctx)
+  const newCtx = node.run(ctx) ?? ctx
 
   if (Array.isArray(node.children)) {
     for (const child of node.children) {
-      evalNode(child, { ...ctx, parent: newCtx }) // pass return value of node as parent in children context
+      evalNode(child, { ...ctx, ...newCtx }) // merge parent context with new context
     }
   }
 }
@@ -28,5 +28,5 @@ const evalNode = (node: T.Element, ctx: any) => {
 export type ServerContext = {
   app: express.Application
   http: Server
-  parent?: express.Router
+  router?: express.Router
 }

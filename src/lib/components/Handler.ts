@@ -10,7 +10,7 @@ import { FC } from '../jsxFactory'
 const Handler: FC<HandlerProps, ServerContext> = (props) => ({
   type: 'handler',
   run: (ctx) => {
-    ctx.parent?.all(props.path ?? '/', (req, res, next) => {
+    ctx.router?.all(props.path ?? '/', (req, res, next) => {
       if (req.method === props.method) {
         props.fn(req, res, next)
         return

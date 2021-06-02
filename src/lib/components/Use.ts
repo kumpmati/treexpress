@@ -7,7 +7,7 @@ import { FC } from '../../lib/jsxFactory'
 const Use: FC<UseProps, ServerContext> = (props) => ({
   type: 'use',
   run: (ctx) => {
-    const parent = ctx.parent ?? ctx.app
+    const parent = ctx.router ?? ctx.app
     if (!parent) throw ERRORS.OUTSIDE_SERVER
 
     parent.use(props.path ?? '/', ...asArray(props.fn))
