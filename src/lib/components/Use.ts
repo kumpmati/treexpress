@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express'
-import { ServerContext } from 'lib/index'
-import { asArray } from '../../util'
+import { ServerContext } from '../index'
+import { asArray } from '../util'
 import { ERRORS } from '../../lib/constants/errors'
 import { FC } from '../../lib/jsxFactory'
 

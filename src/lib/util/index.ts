@@ -1,4 +1,4 @@
-import { T } from '../lib/jsxFactory'
+import { T } from '../jsxFactory'
 
 export const asArray = <T>(val: T | T[]): T[] => (Array.isArray(val) ? val : [val])
 

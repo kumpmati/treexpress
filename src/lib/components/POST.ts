@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express'
-import { asArray } from '../../util'
+import { asArray } from '../util'
 import { ServerContext } from '../index'
 import { FC } from '../jsxFactory'
 import { ERRORS } from '../../lib/constants/errors'
