@@ -30,6 +30,7 @@ const Server: FC<ServerProps> = (props) => ({
     await props.init?.(ctx)
 
     const port = props.port ?? process.env.PORT
+    // eslint-disable-next-line no-console
     if (!port) console.warn('WARN: no port defined for server')
 
     setImmediate(() => http.listen(port, () => props.onListen?.(ctx)))
