@@ -2,7 +2,7 @@ import { RequestHandler } from 'express'
 import { ServerContext } from '../index'
 import { FC } from '../jsxFactory'
 import { asArray } from '../util'
-import { ERRORS } from '../../lib/constants/errors'
+import { ERRORS } from '../constants/errors'
 
 /**
  * PATCH request handler

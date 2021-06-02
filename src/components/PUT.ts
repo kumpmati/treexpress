@@ -2,25 +2,25 @@ import { RequestHandler } from 'express'
 import { asArray } from '../util'
 import { ServerContext } from '../index'
 import { FC } from '../jsxFactory'
-import { ERRORS } from '../../lib/constants/errors'
+import { ERRORS } from '../constants/errors'
 
 /**
- * DELETE request handler
+ * PUT request handler
  * @param props
  * @returns
  */
-const DELETE: FC<HandlerProps, ServerContext> = (props) => ({
-  type: 'DELETE handler JSX element',
+const PUT: FC<HandlerProps, ServerContext> = (props) => ({
+  type: 'PUT handler JSX element',
   run: (ctx) => {
     const parent = ctx.router ?? ctx.app
     if (!parent) throw ERRORS.OUTSIDE_SERVER
 
-    parent.delete(props.path ?? '/', ...asArray(props.fn))
+    parent.put(props.path ?? '/', ...asArray(props.fn))
   },
   props,
 })
 
-export default DELETE
+export default PUT
 
 type HandlerProps = {
   fn: RequestHandler | RequestHandler[]

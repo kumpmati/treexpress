@@ -1,8 +1,8 @@
 import { RequestHandler } from 'express'
 import { ServerContext } from '../index'
 import { asArray } from '../util'
-import { ERRORS } from '../../lib/constants/errors'
-import { FC } from '../../lib/jsxFactory'
+import { ERRORS } from '../constants/errors'
+import { FC } from '../jsxFactory'
 
 /**
  * Attaches middleware to its parent router (or server if no parent router is found)

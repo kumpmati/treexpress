@@ -1,8 +1,8 @@
-import { T, start } from './lib/index'
-import Server from './lib/components/Server'
-import GET from './lib/components/GET'
-import Router from './lib/components/Router'
-import { FC } from './lib/jsxFactory'
+import T, { start } from './index'
+import Server from './components/Server'
+import GET from './components/GET'
+import Router from './components/Router'
+import { FC } from './jsxFactory'
 
 const Api: FC<{ path: string }> = ({ path }) => {
   return (

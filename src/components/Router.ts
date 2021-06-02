@@ -1,5 +1,5 @@
 import express from 'express'
-import { ERRORS } from '../../lib/constants/errors'
+import { ERRORS } from '../constants/errors'
 import { ServerContext } from '../index'
 import { FC } from '../jsxFactory'
 

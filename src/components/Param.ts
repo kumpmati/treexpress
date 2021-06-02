@@ -1,7 +1,7 @@
 import { RequestParamHandler } from 'express'
 import { ServerContext } from '../index'
 import { FC } from '../jsxFactory'
-import { ERRORS } from '../../lib/constants/errors'
+import { ERRORS } from '../constants/errors'
 
 /**
  * GET request handler
