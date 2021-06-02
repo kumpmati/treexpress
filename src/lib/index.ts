@@ -1,6 +1,6 @@
 import express from 'express'
 import { Server } from 'http'
-import { T } from './lib/jsxFactory'
+import { T } from './jsxFactory'
 export default T
 
 /**
@@ -18,8 +18,8 @@ export const start = <Ctx = any>(root: T.Element, ctx?: Ctx): void => {
 const evalNode = (node: T.Element, ctx: any) => {
   const newCtx = node.run(ctx) ?? ctx
 
-  if (Array.isArray(node.children)) {
-    for (const child of node.children) {
+  if (Array.isArray(node.props.children)) {
+    for (const child of node.props.children) {
       evalNode(child, { ...ctx, ...newCtx }) // merge parent context with new context
     }
   }

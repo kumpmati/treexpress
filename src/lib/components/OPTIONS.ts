@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express'
 import { asArray } from '../../util'
-import { ServerContext } from '../../index'
+import { ServerContext } from '../index'
 import { FC } from '../jsxFactory'
 import { ERRORS } from '../../lib/constants/errors'
 
@@ -10,7 +10,7 @@ import { ERRORS } from '../../lib/constants/errors'
  * @returns
  */
 const OPTIONS: FC<HandlerProps, ServerContext> = (props) => ({
-  type: 'handler',
+  type: 'OPTIONS handler JSX element',
   run: (ctx) => {
     const parent = ctx.router ?? ctx.app
     if (!parent) throw ERRORS.OUTSIDE_SERVER

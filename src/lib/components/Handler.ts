@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express'
-import { ServerContext } from '../../index'
+import { ServerContext } from '../index'
 import { FC } from '../jsxFactory'
 
 /**
@@ -8,7 +8,7 @@ import { FC } from '../jsxFactory'
  * @returns
  */
 const Handler: FC<HandlerProps, ServerContext> = (props) => ({
-  type: 'handler',
+  type: 'Handler JSX element',
   run: (ctx) => {
     ctx.router?.all(props.path ?? '/', (req, res, next) => {
       if (req.method === props.method) {

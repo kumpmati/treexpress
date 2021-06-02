@@ -1,14 +1,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 export namespace T {
   export function createElement(func: FC, props: Props, ...children: Element[]): Element {
-    const rendered = func({ children, ...props }) // run the component
-
-    return {
-      type: func.name,
-      run: rendered.run,
-      props,
-      children,
-    }
+    return func({ children, ...props })
   }
 
   export interface Element<Ctx = unknown> {

@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express'
-import { ServerContext } from '../../index'
+import { ServerContext } from '../index'
 import { FC } from '../jsxFactory'
 import { asArray } from '../../util'
 import { ERRORS } from '../../lib/constants/errors'
@@ -10,7 +10,7 @@ import { ERRORS } from '../../lib/constants/errors'
  * @returns
  */
 const PATCH: FC<HandlerProps, ServerContext> = (props) => ({
-  type: 'PATCH handler',
+  type: 'PATCH handler JSX element',
   run: (ctx) => {
     const parent = ctx.router ?? ctx.app
     if (!parent) throw ERRORS.OUTSIDE_SERVER
