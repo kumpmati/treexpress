@@ -1,7 +1,7 @@
 import express from 'express'
 import { createServer } from 'http'
-import T, { ServerContext } from '../index'
-import { FC } from '../jsxFactory'
+import { ServerContext } from '../index'
+import { FC, T } from '../jsxFactory'
 
 /**
  * Main server component. Starts an express.js server, and passes the server down to its children

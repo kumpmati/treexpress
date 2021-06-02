@@ -37,56 +37,65 @@ Your `tsconfig.json` should include the following options:
 
 ```jsx
 // index.tsx
-import T, { start } from 'treexpress'
+import { T, start } from 'treexpress'
+import GET from 'treexpress/dist/lib/components/GET'
+import Router from 'treexpress/dist/lib/components/Router'
+import Server from 'treexpress/dist/lib/components/Server'
+import Use from 'treexpress/dist/lib/components/Use'
 
 start(
-  <server port={80}>
-    <router path="/api">
-      <use
+  <Server port={8000}>
+    <Router path="/api">
+      <Use
         fn={(req, res, next) => {
           console.log(req.method, req.path)
           next()
         }}
       />
-
-      <get fn={(req, res) => res.status(200).json({ foo: 'bar' })} />
-    </router>
-  </server>,
+      <GET fn={(_, res) => res.send('hello').end()} />
+    </Router>
+  </Server>,
 )
 ```
 
-The example code has a single GET request handler at `http://localhost:80/api`, and a logger middleware in the `/api` router that prints the request method and path
+The example code has a single GET request handler at `http://localhost:8000/api`, and a logger middleware that prints the request method and path
 
 **Same example using custom components:**
 
 ```jsx
 // myComponent.tsx
-import T, { FC } from 'treexpress'
+import { T } from 'treexpress'
+import GET from 'treexpress/dist/lib/components/GET'
+import Router from 'treexpress/dist/lib/components/Router'
+import Use from 'treexpress/dist/lib/components/Use'
 
-export const Api: FC<{ path: string }> = ({ path }) => {
+const MyComponent = () => {
   return (
-    <router path={path}>
-      <use
+    <Router path="/api">
+      <Use
         fn={(req, res, next) => {
           console.log(req.method, req.path)
           next()
         }}
       />
-      <get fn={(req, res) => res.status(200).json({ hello: 'world' })} />
-    </router>
+      <GET fn={(_, res) => res.send('hello').end()} />
+    </Router>
   )
 }
+
+export default MyComponent
 ```
 
 ```jsx
 // index.tsx
-import T, { start } from 'treexpress'
-import { Api } from './myComponent'
+import { T, start } from 'treexpress'
+import Server from 'treexpress/dist/lib/components/Server'
+import MyComponent from './myComponent'
 
 start(
-  <server port={80}>
-    <Api path="/api" />
-  </server>,
+  <Server port={8000}>
+    <MyComponent />
+  </Server>,
 )
 ```
 

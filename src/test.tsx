@@ -1,4 +1,4 @@
-import T, { start } from './lib/index'
+import { T, start } from './lib/index'
 import Server from './lib/components/Server'
 import GET from './lib/components/GET'
 import Router from './lib/components/Router'
