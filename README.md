@@ -120,10 +120,14 @@ Arguments:
 - `root: T.element`
 
   The node to start evaluating. It will first evaluate the root element, then recursively evaluate each of its child nodes.
+  
+- `ctx?: T`
+
+  Optional context to give to the Server component. currently does nothing.
 
 ### Server
 
-Wrapper component around the `express()` server. Must be the root component of the `start()`-function.
+Wrapper component around the `express()` server. Should be the root component of the `start()`-function. All routers and handlers must be defined inside the Server
 
 Component: `Server`
 
