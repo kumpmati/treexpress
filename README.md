@@ -1,10 +1,14 @@
 # Treexpress 🌲
 
-Write express.js servers in JSX format.
+**Super-mega-hyper experimental project! Use at your own risk, the API will likely change with future releases!**
 
-**Note:** This project is highly experimental and very buggy! Its api might completely change in the next versions. Do not use it in production!
+Treexpress is a teeny tiny library built around express.js that allows you to write the basic parts of an express.js server using JSX components.
 
-Treexpress is a teeny tiny library built around express.js that allows you to write the basic parts of an express.js server using JSX tags. It supports simple function components along with the built-in tags. Treexpress is **not** reactive, meaning the components are run only once at the start of the server, and will not react to changes in their props or contents.
+Since this is mostly just a wrapper around express, it is **highly** recommended to learn express first, as Treexpress tries to preserve most of the core principles of express.
+
+[Express v4 documentation](http://expressjs.com/en/4x/api.html)
+
+Treexpress supports functional components only. Treexpress is **not** reactive, meaning the components are run only once at the start, and will not react to changes in their props or children.
 
 ## Setup
 
@@ -58,7 +62,7 @@ start(
 )
 ```
 
-The example code has a single GET request handler at `http://localhost:8000/api`, and a logger middleware that prints the request method and path
+The example code has a single GET request handler at `http://localhost:8000/api`, and a logger middleware that prints the request method and path on every request to `http://localhost:8000/api`.
 
 **Same example using custom components:**
 
@@ -99,82 +103,92 @@ start(
 )
 ```
 
-You can probably see the resemblance to React, with the props and returning JSX and such. Just keep in mind that this is _not_ React!
+You can probably see the resemblance to React, with the props and returning JSX and such. Just keep in mind that this is **not** React! Each component is only run **once**!
 
 ## Reference
 
+### Running the server
+
+To start the server we use a simple function that evaluates the node tree given to it. Its intended use is to pass the `<Server ...>...</Server>` inside it, and in turn it will start the server.
+
+```ts
+start<T>(root: T.element, ctx?: T) => void
+```
+
+Arguments:
+
+- `root: T.element`
+
+  The node to start evaluating. It will first evaluate the root element, then recursively evaluate each of its child nodes.
+
 ### Server
 
-The main express App that all routers and handlers are attached to. Every router and handler must be inside the server tag to work.
+Wrapper component around the `express()` server. Must be the root component of the `start()`-function.
 
-Tag: `server`
+Component: `Server`
 
 Props:
 
-- `port`: number | string
+- `port: number | string`
 
   The port that the server runs on
 
-### Routers
+- `settings?: { [k: string]: unknown }`
 
-Standard express.js Router. You can nest these as deep as you want, and attach request handlers and middleware to it.
+  Optional settings object to pass settings to the underlying express app. Each key is a setting name and the value is the desired setting value. It uses the express.js `app.set()` function internally. [Relevant Express documentation](http://expressjs.com/en/5x/api.html#app.set)
 
-Tag: `router`
+- `beforeInit?: () => Promise<unknown> | unknown`
+
+  Optional sync/async function to run before the express server is initialized. If the function is async, the component will await the function before creating the express server.
+
+- `init?: (ctx: ServerContext) => Promise<unknown> | unknown`
+
+  Optional sync/async function to run after the express server has been created but is not listening yet. If the function is async, the component will await the function before continuing.
+
+- `onListen?: (ctx: ServerContext) => Promise<unknown> | unknown`
+
+  Optional sync/async function to run after the server has started listening.
+
+### Router
+
+Wrapper component around `express.Router()`. Any child routers, handlers and middleware are attached to this router. You can nest these just like in a normal express app.
+
+Component: `Router`
 
 Props:
 
 - `path`: string
 
-  The router will be attached to this path, appending the path to the router's parent's path.
+  Mount path.
 
 ### Request handlers
 
-Standard express.js request handler. You can define which request method it accepts, and a handler function that handles the requests. Optionally you can also define a path for the request handler.
+Wrapper components around the express.js route handlers. Uses the express `router.METHOD(path, [callback, ...] callback)` function (where METHOD is replaced by the HTTP method in **lowercase**). This can be a child element of a `Server` or `Router` component, but not another request handler or middleware component.
 
-Tag: `handler`
-
-Props:
-
-- `path`?: string
-
-  Path to attach the handler to. Relative to its parent router. If unspecified, the path is `/`.
-
-- `method`: "GET" | "POST" | "PUT" | "DELETE"
-
-  The accepted request method for this handler. Currently supports only one method at a time
-
-- `fn`: (req, res, next) => any
-
-  An express.js request handler function. This function is called every time a request to the handler's path is received.
-
-### Method-specifig request handlers
-
-Alternatively to the `handler` tag, you can use the HTTP method name (in lowercase) as the tag name. It works the same way as the `handler` tag, as in you can define an optional path and a handler function.
-
-Tags: `get`, `post`, `put`, `delete`
+Currently supported methods: `GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `OPTIONS`
 
 Props:
 
-- `path`?: string
+- `path?: string`
 
-  Path to attach the handler to. Relative to its parent router. If unspecified, the path is `/`.
+  Optional mount path. Relative to its parent element. Default value is `/`
 
-- `fn`: (req, res, next) => any
+- `fn: RequestHandler | RequestHandler[]`
 
-  Normal express.js request handler. This function is called every time a request with the same method as the tag name is received at the given path.
+  An express request handler function, or an array of functions. These are called when a request to the handler's path is received. If `fn` is an array, the functions are registered sequentially. [Relevant Express documentation](http://expressjs.com/en/5x/api.html#router.METHOD)
 
 ### Middleware
 
 Allows you to attach an express.js middleware function to a router (or the server). Optionally you can also define a path for the middleware.
 
-Tags: `use`, `middleware`
+Component: `Use`
 
 Props:
 
 - `path`?: string
 
-  Path to attach the middleware to. Relative to its parent router. If unspecified, the path is `/`.
+  Path to attach the middleware to. Relative to its parent router. Default value is `/`.
 
-- `fn`: (req, res, next) => any
+- `fn: RequestHandler | RequestHandler[]`
 
-  Any normal express.js middleware function.
+  Any normal express.js middleware function, or array of functions. These are called on every request to the specified path. If `fn` is an array, the functions are registered sequentially.

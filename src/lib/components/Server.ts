@@ -43,7 +43,7 @@ const Server: FC<ServerProps> = (props) => ({
 export default Server
 
 type ServerProps = {
-  port?: string | number
+  port: string | number
   children?: T.Element<ServerContext> | T.Element<ServerContext>[]
   beforeInit?: () => Promise<unknown> | unknown
   init?: (ctx: ServerContext) => Promise<unknown> | unknown

@@ -1,7 +1,7 @@
 import express from 'express'
 import { ERRORS } from '../../lib/constants/errors'
 import { ServerContext } from '../index'
-import { FC, T } from '../jsxFactory'
+import { FC } from '../jsxFactory'
 
 /**
  * Express.js Router
@@ -27,6 +27,4 @@ export default Router
 
 type RouterProps = {
   path: string
-  children?: T.Element | T.Element[]
-  custom?: unknown
 }
