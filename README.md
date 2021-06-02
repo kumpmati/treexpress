@@ -121,7 +121,7 @@ Arguments:
 
   The node to start evaluating. It will first evaluate the root element, then recursively evaluate each of its child nodes.
   
-- `ctx?: T`
+- `ctx?: any`
 
   Optional context to give to the Server component. currently does nothing.
 
