@@ -15,12 +15,19 @@ export const start = <Ctx = any>(root: T.Element, ctx?: Ctx): void => {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const evalNode = (node: T.Element, ctx: any) => {
-  const newCtx = node.run(ctx) ?? ctx
+const evalNode = async (node: T.Element, ctx: any) => {
+  if (Array.isArray(node)) {
+    for await (const item of node) {
+      evalNode(item, ctx)
+    }
+    return
+  }
 
-  if (Array.isArray(node.props.children)) {
+  const newCtx = (await node.run?.(ctx)) ?? ctx
+
+  if (Array.isArray(node.props?.children)) {
     for (const child of node.props.children) {
-      evalNode(child, { ...ctx, ...newCtx }) // merge parent context with new context
+      await evalNode(child, { ...ctx, ...newCtx }) // merge parent context with new context
     }
   }
 }

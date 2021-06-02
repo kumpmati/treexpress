@@ -6,7 +6,7 @@ export namespace T {
 
   export interface Element<Ctx = unknown> {
     type: string
-    run: (ctx: Ctx) => unknown | null
+    run: (ctx: Ctx) => Promise<unknown | null> | unknown | null
     props: Props
     children?: Element | Element[]
   }
