@@ -17,7 +17,7 @@ Install the package with npm: `npm install treexpress`.
 In addition to `treexpress`, you'll need to install the following packages:
 
 - TypeScript: `npm install --save-dev typescript`
-- Express.js: `npm install express`
+- Express.js: `npm install express` (if you want to utilise express features that are not present in Treexpress)
 
 Your `tsconfig.json` should include the following options:
 
