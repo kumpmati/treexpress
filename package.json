@@ -1,6 +1,6 @@
 {
   "name": "treexpress",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Write express.js servers using JSX",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
