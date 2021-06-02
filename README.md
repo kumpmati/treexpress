@@ -29,7 +29,7 @@ Your `tsconfig.json` should include the following options:
     "esModuleInterop": true,
     "moduleResolution": "node",
     "jsx": "react",
-    "jsxFactory": "T.createElement",
+    "jsxFactory": "T",
   },
   // ...
 }
@@ -41,11 +41,7 @@ Your `tsconfig.json` should include the following options:
 
 ```jsx
 // index.tsx
-import { T, start } from 'treexpress'
-import GET from 'treexpress/dist/lib/components/GET'
-import Router from 'treexpress/dist/lib/components/Router'
-import Server from 'treexpress/dist/lib/components/Server'
-import Use from 'treexpress/dist/lib/components/Use'
+import T, { start, Server, Router, Use, GET } from 'treexpress'
 
 start(
   <Server port={8000}>
@@ -68,12 +64,9 @@ The example code has a single GET request handler at `http://localhost:8000/api`
 
 ```jsx
 // myComponent.tsx
-import { T } from 'treexpress'
-import GET from 'treexpress/dist/lib/components/GET'
-import Router from 'treexpress/dist/lib/components/Router'
-import Use from 'treexpress/dist/lib/components/Use'
+import T, { Router, Use, GET, FC } from 'treexpress'
 
-const MyComponent = () => {
+const MyComponent: FC = () => {
   return (
     <Router path="/api">
       <Use
@@ -92,8 +85,7 @@ export default MyComponent
 
 ```jsx
 // index.tsx
-import { T, start } from 'treexpress'
-import Server from 'treexpress/dist/lib/components/Server'
+import T, { start, Server } from 'treexpress'
 import MyComponent from './myComponent'
 
 start(
@@ -120,7 +112,7 @@ Arguments:
 - `root: T.element`
 
   The node to start evaluating. It will first evaluate the root element, then recursively evaluate each of its child nodes.
-  
+
 - `ctx?: any`
 
   Optional context to give to the Server component. currently does nothing.
